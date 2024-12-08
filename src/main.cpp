@@ -24,4 +24,22 @@ public:
     }
 };
 
+// Pokemon class
+class Pokemon {
+public:
+    string name, type;
+    int maxHP, currentHP;
+    vector<Skill> skills;
+
+    Pokemon(const string& name, const string& type, int maxHP, const vector<Skill>& skills)
+        : name(name), type(type), maxHP(maxHP), currentHP(maxHP), skills(skills) {}
+
+    bool isAlive() const {
+        return currentHP > 0;
+    }
+
+    void takeDamage(int damage) {
+        currentHP = max(0, currentHP - damage);
+    }
+};
 
