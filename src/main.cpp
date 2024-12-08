@@ -43,3 +43,25 @@ public:
     }
 };
 
+
+int main() {
+    // Initialize Pokémon and skills
+    vector<Pokemon> pokemons = {
+        {"Pikachu", "Electric", 35, { {"Tackle", "Normal", 4, 5}, {"Grass Knot", "Grass", 8, 5}, {"Thunderbolt", "Electric", 10, 5}, {"Megabolt", "Electric", 15, 3} }},
+        {"Dratini", "Water", 41, { {"Wrap", "Normal", 4, 10}, {"Aqua Tail", "Water", 3, 5}, {"Water Pulse", "Water", 13, 2}, {"Hyper Beam", "Normal", 20, 1} }},
+        {"Eevee", "Normal", 55, { {"Tackle", "Normal", 4, 5}, {"Sand Attack", "Ground", 8, 3}, {"Bite", "Normal", 12, 3}, {"Rain Dance", "Water", 15, 1} }},
+        {"Charmander", "Fire", 39, { {"Tackle", "Normal", 4, 5}, {"Flamethrower", "Fire", 11, 5}, {"Dig", "Ground", 7, 5}, {"Heat Wave", "Fire", 14, 5} }},
+        {"Palkia", "Water", 90, { {"Hydro Pump", "Water", 12, 10}, {"Earth Power", "Ground", 15, 10}, {"Surf", "Water", 13, 10}, {"Spatial Rend", "Normal", 30, 10} }}
+    };
+
+    // Choose Pokémon
+    auto chosenPokemons = choosePokemon(pokemons);
+    Pokemon& pokemon1 = chosenPokemons.first;
+    Pokemon& pokemon2 = chosenPokemons.second;
+
+    // Start battle
+    battle(pokemon1, pokemon2);
+
+    return 0;
+}
+
