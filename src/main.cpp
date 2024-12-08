@@ -60,6 +60,30 @@ int getEffectiveness(const string& attackType, const string& defenderType) {
     return 0; // Default effectiveness
 }
 
+// Display battle page
+void displayBattlePage(const Pokemon& pokemon1, const Pokemon& pokemon2, const string& latestSkill1, const string& latestSkill2, const string& effectiveness1, const string& effectiveness2, bool isPlayer1Turn) {
+    cout << "+-------------------------------------------------------------+\n";
+    cout << "| 2024-02 Object-Oriented Programming Pokemon Master          |\n";
+    cout << "+------------------------------+------------------------------+\n";
+    cout << "| " << setw(29) << left << pokemon1.name + (isPlayer1Turn ? " (*)" : "")
+         << "| " << setw(29) << left << pokemon2.name + (!isPlayer1Turn ? " (*)" : "") << "|\n";
+    cout << "| Type: " << setw(23) << left << pokemon1.type
+         << "| Type: " << setw(23) << left << pokemon2.type << "|\n";
+    cout << "| HP: " << setw(25) << left << pokemon1.currentHP
+         << "| HP: " << setw(25) << left << pokemon2.currentHP << "|\n";
+    cout << "+------------------------------+------------------------------+\n";
+    cout << "| Latest Skill: " << setw(15) << left << latestSkill1
+         << "| Latest Skill: " << setw(15) << left << latestSkill2 << "|\n";
+    cout << "| " << setw(29) << left << effectiveness1
+         << "| " << setw(29) << left << effectiveness2 << "|\n";
+    cout << "+------------------------------+------------------------------+\n";
+
+    for (int i = 0; i < 4; ++i) {
+        displaySkillInfo(i, pokemon1.skills[i], pokemon2.skills[i]);
+    }
+    cout << "+------------------------------+------------------------------+\n";
+}
+
 int main() {
     // Initialize Pokémon and skills
     vector<Pokemon> pokemons = {
