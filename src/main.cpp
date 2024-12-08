@@ -43,6 +43,22 @@ public:
     }
 };
 
+// Type effectiveness chart
+int getEffectiveness(const string& attackType, const string& defenderType) {
+    static const unordered_map<string, unordered_map<string, int>> effectivenessMap = {
+        {"Normal", { {"Ground", 0}, {"Electric", 0}, {"Water", 0}, {"Grass", 0}, {"Fire", 0} }},
+        {"Ground", { {"Electric", 5}, {"Grass", -3}, {"Fire", 5} }},
+        {"Electric", { {"Ground", -3}, {"Water", 5}, {"Grass", -3} }},
+        {"Water", { {"Fire", 5}, {"Grass", -3}, {"Ground", 5} }},
+        {"Grass", { {"Water", 5}, {"Ground", 5}, {"Fire", -3} }},
+        {"Fire", { {"Grass", 5}, {"Water", -3}, {"Ground", -3} }}
+    };
+
+    if (effectivenessMap.count(attackType) && effectivenessMap.at(attackType).count(defenderType)) {
+        return effectivenessMap.at(attackType).at(defenderType);
+    }
+    return 0; // Default effectiveness
+}
 
 int main() {
     // Initialize Pokémon and skills
