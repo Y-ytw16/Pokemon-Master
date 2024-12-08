@@ -60,6 +60,18 @@ int getEffectiveness(const string& attackType, const string& defenderType) {
     return 0; // Default effectiveness
 }
 
+// Display skill info
+void displaySkillInfo(int index, const Skill& skill1, const Skill& skill2) {
+    cout << "| (" << index << ") " << setw(25) << left << skill1.name
+         << "| (" << index << ") " << setw(25) << left << skill2.name << "|\n";
+    cout << "|     - Type: " << setw(17) << left << skill1.type
+         << "|     - Type: " << setw(17) << left << skill2.type << "|\n";
+    cout << "|     - Damage: " << setw(15) << left << skill1.damage
+         << "|     - Damage: " << setw(15) << left << skill2.damage << "|\n";
+    cout << "|     - Count: " << setw(16) << (to_string(skill1.remainingTry) + "(" + to_string(skill1.maxTry) + ")")
+         << "|     - Count: " << setw(16) << (to_string(skill2.remainingTry) + "(" + to_string(skill2.maxTry) + ")") << "|\n";
+}
+
 // Display battle page
 void displayBattlePage(const Pokemon& pokemon1, const Pokemon& pokemon2, const string& latestSkill1, const string& latestSkill2, const string& effectiveness1, const string& effectiveness2, bool isPlayer1Turn) {
     cout << "+-------------------------------------------------------------+\n";
