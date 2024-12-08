@@ -100,6 +100,39 @@ pair<Pokemon, Pokemon> choosePokemon(const vector<Pokemon>& pokemons) {
     return {pokemons[choice1], pokemons[choice2]};
 }
 
+// Choose a skill
+int chooseSkill(const Pokemon& pokemon) {
+    int choice;
+    do {
+        cout << "Choose a skill (0~3): ";
+        cin >> choice;
+    } while (choice < 0 || choice > 3);
+    return choice;
+}
+
+// Take a turn
+void takeTurn(Pokemon& attacker, Pokemon& defender, string& latestSkill, string& effectiveness) {
+    int choice = chooseSkill(attacker);
+    Skill& skill = attacker.skills[choice];
+
+    if (!skill.use()) {
+        cout << attacker.name << " failed to perform " << skill.name << ".\n\n";
+        return;
+    }
+
+    int damage = skill.damage + getEffectiveness(skill.type, defender.type);
+    defender.takeDamage(damage);
+
+    latestSkill = skill.name;
+    int effectivenessValue = getEffectiveness(skill.type, defender.type);
+    effectiveness = (effectivenessValue == 5) ? "It was super effective." : 
+                    (effectivenessValue == -3) ? "It was not very effective." : "It was effective.";
+
+    // Print turn summary
+    cout << attacker.name << " used " << skill.name << ".\n";
+    cout << effectiveness << "\n\n";
+}
+
 int main() {
     // Initialize Pokémon and skills
     vector<Pokemon> pokemons = {
