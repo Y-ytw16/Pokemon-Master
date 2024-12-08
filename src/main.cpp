@@ -133,6 +133,32 @@ void takeTurn(Pokemon& attacker, Pokemon& defender, string& latestSkill, string&
     cout << effectiveness << "\n\n";
 }
 
+// Battle logic
+void battle(Pokemon& pokemon1, Pokemon& pokemon2) {
+    string latestSkill1 = "-", latestSkill2 = "-";
+    string effectiveness1 = "", effectiveness2 = "";
+    bool isPlayer1Turn = true;
+
+    while (pokemon1.isAlive() && pokemon2.isAlive()) {
+        displayBattlePage(pokemon1, pokemon2, latestSkill1, latestSkill2, effectiveness1, effectiveness2, isPlayer1Turn);
+
+        if (isPlayer1Turn) {
+            takeTurn(pokemon1, pokemon2, latestSkill1, effectiveness1);
+        } else {
+            takeTurn(pokemon2, pokemon1, latestSkill2, effectiveness2);
+        }
+
+        isPlayer1Turn = !isPlayer1Turn;
+    }
+
+    cout << "===============================================================\n";
+    if (pokemon1.isAlive()) {
+        cout << "Match Result: " << pokemon1.name << " defeats " << pokemon2.name << "\n";
+    } else {
+        cout << "Match Result: " << pokemon2.name << " defeats " << pokemon1.name << "\n";
+    }
+}
+
 int main() {
     // Initialize Pokémon and skills
     vector<Pokemon> pokemons = {
